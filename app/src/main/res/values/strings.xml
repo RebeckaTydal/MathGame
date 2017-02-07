@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Math Game</string>
+    <string name="math_game">Math Game</string>
+    <string name="play">Play</string>
+    <string name="menu">Menu</string>
+    <string name="score">Score</string>
+    <string name="help">Help</string>
+    <string name="level">Level: %1$d</string>
+    <string name="reset">Reset score and level</string>
+    <string name="points">You have %1$d points</string>
+    <string name="what_to_do">What to do</string>
+    <string name="info">This is a game of mental arithmetic. There are three levels. The first level rewards 1 point, the second 2 points and the third 5 points.</string>
+    <string name="android">This app requires Android level 4.3 Jelly Bean.</string>
+    <string name="calculate">Calculate</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="multiply">*</string>
+    <string name="equals">=</string>
+    <string name="check">Check</string>
+    <string name="answer">Answer</string>
+</resources>
