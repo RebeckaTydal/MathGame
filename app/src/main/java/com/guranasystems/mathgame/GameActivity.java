@@ -58,10 +58,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         buttonEasyTwo.setOnClickListener(this);
         buttonEasyThree.setOnClickListener(this);
 
+        textViewFirstNormal = (TextView) findViewById(R.id.first_normal);
+        textViewSecondNormal = (TextView) findViewById(R.id.second_normal);
+        
+
         linearNormal = (LinearLayout) findViewById(R.id.linear_normal);
         linearHard = (LinearLayout) findViewById(R.id.linear_hard);
-
-        newGame();
 
     }
 
@@ -81,6 +83,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if (level < 3) {
             linearHard.setVisibility(View.INVISIBLE);
         }
+
+        newGame();
     }
 
     @Override
@@ -94,35 +98,47 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void newGame() {
+        // Get three random numbers
+        int limit = level * 10;
         Random randInt = new Random();
-
-        int firstNumber = randInt.nextInt(20);
-        int secondNumber = randInt.nextInt(20);
-        int thirdNumber = randInt.nextInt(20);
-
+        int firstNumber = randInt.nextInt(limit);
+        int secondNumber = randInt.nextInt(limit);
+        int thirdNumber = randInt.nextInt(limit);
         firstNumber++;
         secondNumber++;
         thirdNumber++;
 
-        setupLevelOne(firstNumber, secondNumber, thirdNumber);
-        if (level > 1) {
-            linearNormal.setVisibility(View.VISIBLE);
-            setupLevelTwo(firstNumber, secondNumber, thirdNumber);
-        }
-        if (level == 3) {
-            linearHard.setVisibility(View.VISIBLE);
-            setupLevelThree(firstNumber, secondNumber, thirdNumber);
-        }
-    }
-
-    void setupLevelOne(int firstNumber, int secondNumber, int thirdNumber) {
-        Random randInt = new Random();
-        int displayAnswers = randInt.nextInt(3);
-
-        // Save correct answers
+        // Save correct answers for all levels
         answerLevelOne = firstNumber + secondNumber;
         answerLevelTwo = firstNumber - secondNumber;
         answerLevelThree = firstNumber * secondNumber;
+
+        // Setup depending on level
+        setupLevelOne(firstNumber, secondNumber, thirdNumber);
+        switch (level) {
+            case 1:
+                linearNormal.setVisibility(View.INVISIBLE);
+                linearHard.setVisibility(View.INVISIBLE);
+                break;
+            case 2:
+                setupLevelTwo(firstNumber, secondNumber);
+                linearNormal.setVisibility(View.VISIBLE);
+                linearHard.setVisibility(View.INVISIBLE);
+                break;
+            default:
+                setupLevelTwo(firstNumber, secondNumber);
+                setupLevelThree(firstNumber, secondNumber);
+                linearNormal.setVisibility(View.VISIBLE);
+                linearHard.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+    // Setup for level one
+    void setupLevelOne(int firstNumber, int secondNumber, int thirdNumber) {
+        // For the answer buttons
+        Random randInt = new Random();
+        int displayAnswers = randInt.nextInt(3);
 
         // Convert numbers to text
         String first = "" + firstNumber;
@@ -155,11 +171,19 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    void setupLevelTwo(int firstNumber, int secondNumber, int thirdNumber) {
+    // Setup for level two
+    void setupLevelTwo(int firstNumber, int secondNumber) {
+        // Convert numbers to text
+        String first = "" + firstNumber;
+        String second = "" + secondNumber;
+
+        textViewFirstNormal.setText(first);
+        textViewSecondNormal.setText(second);
 
     }
 
-    void setupLevelThree(int firstNumber, int secondNumber, int thirdNumber) {
+    // Setup for level three
+    void setupLevelThree(int firstNumber, int secondNumber) {
 
     }
 
